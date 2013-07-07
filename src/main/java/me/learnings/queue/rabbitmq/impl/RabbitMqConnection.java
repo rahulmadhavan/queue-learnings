@@ -1,34 +1,37 @@
-package me.learnings.queues.queue.rabbitmq;
+package me.learnings.queue.rabbitmq.impl;
+
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import me.learnings.queue.rabbitmq.RabbitMqConnectionInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+
 
 /**
  * Created with IntelliJ IDEA.
  * User: rahulm
- * Date: 02/07/13
- * Time: 9:08 PM
+ * Date: 06/07/13
+ * Time: 6:08 PM
  * To change this template use File | Settings | File Templates.
  */
-public class RabbitMqConnection {
+public class RabbitMqConnection implements RabbitMqConnectionInterface {
 
     private static Logger logger = LoggerFactory.getLogger(RabbitMqConnection.class);
 
-    private Integer port;
-    private String host;
     private Connection connection;
     private Channel channel;
-
+    private Integer port;
+    private String host;
 
     public Channel getChannel() {
         return channel;
     }
 
     private RabbitMqConnection(String aHost, Integer aPort, Connection aConnection, Channel aChannel){
-        this.host = aHost;
+        host = aHost;
         port = aPort;
         connection = aConnection;
         channel = aChannel;
@@ -45,12 +48,12 @@ public class RabbitMqConnection {
         private Channel channel;
 
         public Builder withHost(String aHost){
-            this.host = aHost;
+            host = aHost;
             return this;
         }
 
         public Builder withPort(Integer aPort){
-            this.port = aPort;
+            port = aPort;
             return this;
         }
 
@@ -140,3 +143,4 @@ public class RabbitMqConnection {
 
 
 }
+

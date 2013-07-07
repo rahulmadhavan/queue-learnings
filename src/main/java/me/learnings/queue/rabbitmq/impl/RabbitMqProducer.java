@@ -1,26 +1,29 @@
-package me.learnings.queues.queue.rabbitmq;
+package me.learnings.queue.rabbitmq.impl;
 
-import com.rabbitmq.client.ShutdownSignalException;
+
+import me.learnings.queue.rabbitmq.RabbitMqConnectionInterface;
+import me.learnings.queue.rabbitmq.RabbitMqMessageInterface;
+import me.learnings.queue.rabbitmq.RabbitMqProducerInterface;
 import org.apache.commons.pool.ObjectPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-
 /**
  * Created with IntelliJ IDEA.
  * User: rahulm
- * Date: 02/07/13
- * Time: 2:46 PM
+ * Date: 06/07/13
+ * Time: 9:14 PM
  * To change this template use File | Settings | File Templates.
  */
-public class RabbitMqStaticProducer {
+public class RabbitMqProducer implements RabbitMqProducerInterface {
 
-    private static Logger logger = LoggerFactory.getLogger(RabbitMqStaticProducer.class);
+    private static Logger logger = LoggerFactory.getLogger(RabbitMqProducer.class);
 
-    public static boolean push(ObjectPool<RabbitMqConnection> connectionPool, RabbitMqMessage message) {
+    @Override
+    public boolean push(ObjectPool<RabbitMqConnectionInterface> connectionPool, RabbitMqMessageInterface<String> message) {
+        RabbitMqConnectionInterface rabbitMqConnection;
 
-        RabbitMqConnection rabbitMqConnection;
+        logger.debug(String.format("message-publish-failure: %s exchange: %s routingKey: %s",message.getMessage().toString(),message.getExchange(),message.getRoutingKey()));
 
         try{
 
@@ -61,6 +64,4 @@ public class RabbitMqStaticProducer {
 
         return true;
     }
-
-
 }

@@ -6,6 +6,9 @@
 *.ear
 
 
+# Target
+target/
+
 # idea directories #
 .idea/
 

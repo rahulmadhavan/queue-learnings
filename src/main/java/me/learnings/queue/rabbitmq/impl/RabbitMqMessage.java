@@ -1,13 +1,16 @@
-package me.learnings.queues.queue.rabbitmq;
+package me.learnings.queue.rabbitmq.impl;
+
+
+import me.learnings.queue.rabbitmq.RabbitMqMessageInterface;
 
 /**
  * Created with IntelliJ IDEA.
  * User: rahulm
- * Date: 02/07/13
- * Time: 11:30 AM
+ * Date: 06/07/13
+ * Time: 6:22 PM
  * To change this template use File | Settings | File Templates.
  */
-public class RabbitMqMessage<K> {
+public class RabbitMqMessage<K> implements RabbitMqMessageInterface<K> {
 
     private String exchange;
     private String routingKey;
